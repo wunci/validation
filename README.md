@@ -65,16 +65,16 @@ var data = {
 
 ```
 vld.form({
-'wrap':'body',
-'on': 'blur',
-onSuccess:function(){
-	// ajax or form
-	alert('success');
-	vld.ajax({
+  'wrap':'body',
+  'on': 'blur',
+  onSuccess:function(){
+   	// ajax or form
+   	alert('success');
+   	vld.ajax({
 
-	})
-},
-'fields': data
+  	})
+	},
+  'fields': data
 })
 ```
 
@@ -83,29 +83,29 @@ onSuccess:function(){
 ```
 var types = {
 	// 是否为空
-    isEmpty:function(value){
-        if(value == null || value.length === 0 || /^\s+$/g.test(value)){
-            return false;
-        }
-        return true;
-    },
-    // 手机号或座机
-    isPhone:function(value){
-        var reg = /^([1][3|5|8]\d{9}|\d{4}-?\d{7}|\d{3}-?\d{8})$/;
-        if(reg.test(value)){
-            return true;
-        }
-        return false;
-    }
-}
-return function(value,type){ 
-	//type为检测类型,value为检测的值
-    if(!types[type]){
-        throw "检测类型不存在";
-    }
-    if(!types[type](value)){
-        return true;
+	isEmpty:function(value){
+	  if(value == null || value.length === 0 || /^\s+$/g.test(value)){
+	    return false;
+	  }
+	  return true;
+	},
+	// 手机号或座机
+	isPhone:function(value){
+    var reg = /^([1][3|5|8]\d{9}|\d{4}-?\d{7}|\d{3}-?\d{8})$/;
+    if(reg.test(value)){
+      return true;
     }
     return false;
+	}
+}
+ return function(value,type){ 
+	//type为检测类型,value为检测的值
+  if(!types[type]){
+    throw "检测类型不存在";
+  }
+  if(!types[type](value)){
+    return true;
+  }
+  return false;
 }
 ```
