@@ -10,11 +10,11 @@
 
 ## 定义规则
 
-```
+
 | name   | type    |  prompt  |
 | :----: | :----:   | :----: |
-| input的name| 校验类型      |   设置错误提示文字    |
-```
+| input的name| 校验类型   | 设置错误提示文字  |
+
 ```
 var data = {
 	"name":{ 
@@ -57,24 +57,24 @@ var data = {
 }
 ```
 ## 开始验证
-```
+
 | wrap（可选）   | on（可选）    |  onSuccess（可选）  |fields  |
 | :----: | :----:   | :----: |:----: |
 | form的父元素| 触发条件      |   成功之后提交函数    | 规则数据    |
 | body / #form / .form | blur/click/keyup...      |  ajax提交/不选则form提交    | 规则数据    |
-```
+
 ```
 vld.form({
-	'wrap':'body',
-	'on': 'blur',
-	onSuccess:function(){
-		// ajax or form
-		alert('success');
-		vld.ajax({
+'wrap':'body',
+'on': 'blur',
+onSuccess:function(){
+	// ajax or form
+	alert('success');
+	vld.ajax({
 
-		})
-	},
-	'fields': data
+	})
+},
+'fields': data
 })
 ```
 
@@ -82,30 +82,30 @@ vld.form({
 
 ```
 var types = {
-		// 是否为空
-	    isEmpty:function(value){
-	        if(value == null || value.length === 0 || /^\s+$/g.test(value)){
-	            return false;
-	        }
-	        return true;
-	    },
-	    // 手机号或座机
-	    isPhone:function(value){
-	        var reg = /^([1][3|5|8]\d{9}|\d{4}-?\d{7}|\d{3}-?\d{8})$/;
-	        if(reg.test(value)){
-	            return true;
-	        }
-	        return false;
-	    }
-	}
-	return function(value,type){ 
-    	//type为检测类型,value为检测的值
-        if(!types[type]){
-            throw "检测类型不存在";
+	// 是否为空
+    isEmpty:function(value){
+        if(value == null || value.length === 0 || /^\s+$/g.test(value)){
+            return false;
         }
-        if(!types[type](value)){
+        return true;
+    },
+    // 手机号或座机
+    isPhone:function(value){
+        var reg = /^([1][3|5|8]\d{9}|\d{4}-?\d{7}|\d{3}-?\d{8})$/;
+        if(reg.test(value)){
             return true;
         }
         return false;
     }
+}
+return function(value,type){ 
+	//type为检测类型,value为检测的值
+    if(!types[type]){
+        throw "检测类型不存在";
+    }
+    if(!types[type](value)){
+        return true;
+    }
+    return false;
+}
 ```
